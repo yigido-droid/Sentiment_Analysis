@@ -73,6 +73,8 @@ the dataset contains **27,481 rows** and **6 columns**.
 ## 🔍 Exploratory Data Analysis (EDA)
 Visual relationships were explored through heatmaps:
 
-```python
-sns.heatmap(pd.crosstab(df["Time of Tweet"], df["sentiment"]), annot=True, fmt="d", cmap="Blues")
-sns.heatmap(pd.crosstab(df["Age of User"], df["sentiment"]), annot=True, fmt="d", cmap="Reds")
+<img width="519" height="391" alt="download" src="https://github.com/user-attachments/assets/25c53ec6-16ee-47a8-b27c-5f1e3963a23f" />
+
+<img width="519" height="391" alt="download-1" src="https://github.com/user-attachments/assets/0d3ea4bb-7d1d-4cd7-8f59-fa29c0abc710" />
+
+
