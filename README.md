@@ -75,7 +75,23 @@ Visual relationships were explored through heatmaps:
 
 <img width="519" height="391" alt="download" src="https://github.com/user-attachments/assets/25c53ec6-16ee-47a8-b27c-5f1e3963a23f" />
 
+## 🕒 Time of Tweet vs Sentiment Relationship
+
+A heatmap analysis was conducted to examine the relationship between **Time of Tweet** and **Sentiment** categories.  
+However, no significant correlation or observable trend was found.  
+
+This indicates that **tweet timing (morning, afternoon, or night)** does not have a measurable impact on the expressed sentiment (positive, neutral, or negative).  
+In other words, users’ emotional tone in tweets appears to be **independent of posting time**.
+
 <img width="519" height="391" alt="download-1" src="https://github.com/user-attachments/assets/0d3ea4bb-7d1d-4cd7-8f59-fa29c0abc710" />
+
+## 👤 Age of User vs Sentiment Relationship
+
+A heatmap analysis was also performed to explore the relationship between **Age of User** and **Sentiment** categories.  
+Similar to the time-based analysis, **no clear correlation or consistent pattern** was observed.  
+
+This suggests that users’ **age groups** do not significantly influence the **emotional polarity** of their tweets.  
+In summary, the distribution of positive, neutral, and negative sentiments appears **uniform across different age ranges**.
 
 ---
 
