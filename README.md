@@ -76,17 +76,17 @@ A **Linear SVM** classifier is trained on these dense vectors with `class_weight
 
 **Confusion Matrix:**
 
-<img width="581" height="487" alt="Word2Vec Confusion Matrix" src="https://github.com/user-attachments/assets/c3523792-f1d8-40e6-9740-622a7587aa6a" />
+<img width="614" height="486" alt="Ekran Resmi 2025-11-10 18 05 57" src="https://github.com/user-attachments/assets/e47f92ea-b3ab-4465-95c6-4c7f1a97bb43" />
 
 **Classification Report:**
 
-<img width="469" height="221" alt="Word2Vec Classification Report" src="https://github.com/user-attachments/assets/637c0c9d-9256-4a71-bb87-07f03499df85" />
-
+<img width="488" height="225" alt="Ekran Resmi 2025-11-10 18 05 46" src="https://github.com/user-attachments/assets/b1021a7e-fc3d-407d-b669-27a58ab44427" />
+  
 **Interpretation:**  
-- Achieved **~61.7% accuracy** across three classes.  
-- Captures **semantic similarity** (e.g., *great → good → amazing*) beyond surface-level word counts.  
-- Slightly lower accuracy than TF-IDF models, but offers better **contextual understanding**.  
-- Future work can include **pre-trained embeddings** (e.g., GoogleNews, GloVe) to enhance results.
+- The model achieved an overall **accuracy of 61.4%**, performing moderately well across all sentiment categories.  
+- **Positive tweets** had the highest precision (0.681), showing that the model effectively recognized optimistic language patterns.  
+- **Neutral tweets** were the most challenging, often confused with nearby emotional tones (positive or negative).  
+- **Negative tweets** were predicted with reasonable balance but had slightly lower recall, indicating some false negatives.  
 
 ---
 
