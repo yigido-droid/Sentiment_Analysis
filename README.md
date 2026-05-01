@@ -132,20 +132,87 @@ It assigns polarity based on pre-defined word sentiment scores.
 
 ---
 
-## 📊 Overall Comparison
+---
 
-| Model | Vectorization | Accuracy | Key Strength |
-|-------|----------------|-----------|---------------|
-| **Word2Vec + SVM** | Dense semantic embeddings | **~0.62** | Captures contextual meaning and word similarity |
-| **Naive Bayes (TF-IDF)** | Sparse TF-IDF vectors | **~0.67** | Fast, interpretable, frequency-based baseline |
-| **VADER (Lexicon)** | Predefined polarity lexicon | **~0.63** | No training, quick and language-aware |
+## ⚙️ 4. Hybrid Model: BERT Embeddings + VADER Lexicon Features + Linear SVM
+
+**Model Description:**  
+The hybrid model combines **BERT-based contextual embeddings** with **VADER lexicon-based sentiment features**. Unlike the previous models, this approach does not rely only on statistical word frequencies, semantic word embeddings, or predefined sentiment rules. Instead, it combines two complementary sources of information:
+
+- **BERT** captures the contextual and semantic meaning of each tweet.
+- **VADER** provides explicit sentiment polarity scores and tweet-level linguistic features.
+
+In this model, BERT is used as an **embedding extractor**, not as a direct classifier. For each tweet, the `[CLS]` token representation is extracted from BERT, producing a **768-dimensional contextual embedding**. This vector represents the overall semantic meaning of the tweet.
+
+At the same time, VADER extracts lexicon-based and surface-level features, including:
+
+- Negative sentiment score
+- Neutral sentiment score
+- Positive sentiment score
+- Compound sentiment score
+- Tweet length
+- Word count
+- Exclamation mark count
+- Question mark count
+- Uppercase ratio
+- Elongated word count
+- Hashtag count
+- Mention count
+
+These two feature groups are concatenated into a single hybrid feature vector:
+
+**Confusion Matrix:**
+
+<img width="594" height="488" alt="Ekran Resmi 2026-05-01 13 49 36" src="https://github.com/user-attachments/assets/85ea425f-e07c-4e94-bd06-bf478bead43f" />
+
+**Classification Report:**
+
+<img width="510" height="222" alt="Ekran Resmi 2026-05-01 13 49 18" src="https://github.com/user-attachments/assets/768f9983-6f7d-46a4-8be8-5770bf3101a6" />
+
+**Interpretation:**
+The model performed best on the **positive** class, with a precision of **0.734**, recall of **0.761**, and F1-score of **0.747**. This shows that positive tweets were captured effectively by combining BERT’s contextual embeddings with VADER’s polarity features.
+
+The **negative** class also performed well, reaching an F1-score of **0.700**. The model correctly classified **1,120 negative tweets**, although some weaker negative expressions were confused with neutral tweets.
+
+The **neutral** class was the most difficult to classify, with an F1-score of **0.660**. This is expected because neutral tweets often overlap with weakly positive or weakly negative language, making them harder to separate clearly.
+
+---
+
+## 📊 Overall Evaluation
+
+The project compares four different sentiment analysis approaches: **Word2Vec + Linear SVM**, **TF-IDF + Multinomial Naive Bayes**, **VADER**, and the proposed **BERT + VADER + Linear SVM hybrid model**.
+
+| Model | Approach Type | Representation / Features | Accuracy | Key Strength |
+|---|---|---|---:|---|
+| **Word2Vec + Linear SVM** | ML-Based | Dense semantic word embeddings | **61.4%** | Captures semantic similarity between words |
+| **Multinomial Naive Bayes (TF-IDF)** | ML-Based | Sparse TF-IDF vectors | **~67%** | Fast, interpretable, and effective baseline |
+| **VADER** | Lexicon-Based | Predefined sentiment polarity lexicon | **~63%** | Requires no training and provides direct polarity scores |
+| **BERT + VADER + Linear SVM** | Hybrid-Based | Contextual BERT embeddings + VADER lexicon features | **69.94%** | Combines semantic context with explicit sentiment polarity signals |
+
+Among all tested models, the **hybrid BERT + VADER + Linear SVM model achieved the highest overall accuracy**, reaching **69.94%**. This indicates that combining contextual language representation with lexicon-based sentiment features improves classification performance.
+
+The **TF-IDF + Multinomial Naive Bayes** model performed strongly as a traditional machine learning baseline, achieving approximately **67% accuracy**. This shows that frequency-based word importance remains effective for short-text sentiment classification.
+
+The **VADER lexicon-based approach** achieved approximately **63% accuracy** without requiring any model training. This demonstrates that predefined sentiment polarity rules can be useful for social media sentiment analysis, especially for clearly positive or negative tweets. However, VADER is limited because it cannot fully understand context, sarcasm, or subtle expressions.
+
+The **Word2Vec + Linear SVM** model achieved **61.4% accuracy**. Although Word2Vec captures semantic similarity between words, representing each tweet by averaging word embeddings may cause loss of sentence-level meaning and word order information.
+
+Overall, the hybrid model provided the strongest result because it combines two complementary sources of information. **BERT** captures contextual and semantic meaning, while **VADER** contributes explicit sentiment polarity indicators. As a result, the final Linear SVM classifier benefits from both deep language representation and lexicon-based sentiment knowledge.
 
 ---
 
 ## 🧩 Conclusion
 
-- **TF-IDF + Naive Bayes** achieved the highest accuracy, showing that statistical term weighting remains effective for short-text sentiment classification.  
-- **Word2Vec + SVM** provided a deeper understanding of context and meaning, useful for semantic-rich datasets.  
-- **VADER**, though simple, proved competitive with zero training cost.  
+This project investigated **machine learning-based**, **lexicon-based**, and **hybrid-based** approaches for sentiment analysis on Twitter-like text data. The classification task was defined as a three-class problem: **negative**, **neutral**, and **positive** sentiment prediction.
 
-In conclusion, **hybrid use of statistical and semantic features** offers a balanced trade-off between accuracy, interpretability, and linguistic depth — essential for robust sentiment analysis systems.
+The results show that traditional machine learning models can still perform effectively on short-text sentiment classification. In particular, **TF-IDF + Multinomial Naive Bayes** produced a strong baseline result, showing that word frequency and term importance are useful indicators for sentiment prediction.
+
+The **Word2Vec + Linear SVM** model introduced semantic word representation by capturing relationships between words. However, because tweet vectors were created by averaging word embeddings, the model may have lost important sentence-level structure and contextual details.
+
+The **VADER lexicon-based model** showed that sentiment classification can be performed without supervised training by using predefined polarity scores. Although VADER performed competitively, it was less effective in handling contextual meaning, ambiguous sentiment, and neutral expressions.
+
+The proposed **hybrid BERT + VADER + Linear SVM model** achieved the best performance, with an accuracy of **69.94%**. This result suggests that combining **contextual embeddings** with **lexicon-based sentiment features** creates a richer and more effective representation for sentiment classification.
+
+In conclusion, the hybrid approach offers the most balanced solution among the tested methods. It benefits from BERT’s ability to understand contextual meaning and VADER’s ability to provide direct sentiment polarity signals. Therefore, combining deep semantic representations with lexicon-based features can improve sentiment analysis performance, especially for noisy and short social media texts.
+
+
