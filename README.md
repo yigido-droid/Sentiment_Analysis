@@ -1,4 +1,4 @@
-# Comparison between ML-Based and Lexicon-Based Approaches in Sentiment Analysis
+# Comparison between ML-Based, Lexicon-Based and Hybrid-Based Approaches in Sentiment Analysis
 
 ## 📌 Overview
 This project performs **Sentiment Analysis** on Twitter-like text data using both **Machine Learning (ML)** and **Lexicon-Based** approaches.  
